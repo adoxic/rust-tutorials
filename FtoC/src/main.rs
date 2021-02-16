@@ -1,28 +1,47 @@
 use std::io;
 
 fn main() {
-    println!("Is your temperature Fahrenheit or Celsius?  Enter F or C to select");
+    println!("Select what Fibonacci number you want starting with 0 and 1");
 
-    let mut unit = String::new();
+    let mut nth = String::new();
 
-    let mut temp = String::new();
-
-    io::stdin()
-        .read_line(&mut unit)
-        .expect("Failed to read line");
+    let mut i = 1;
+    let mut fib_1 = 0;
+    let mut fib_2 = 1;
     
-    println!("Input the number of degrees");
-
     io::stdin()
-        .read_line(&mut temp)
+        .read_line(&mut nth)
         .expect("Failed to read line");
-        
-    let temp_int: i32 = temp.trim().parse().unwrap();
 
-    if unit.to_lowercase().starts_with("f") {
-        println!("{}F is {}C", temp_int, (temp_int - 32) * 5/9);
-    } else {
-        println!("{}C is {}F", temp_int, (temp_int * 9/5) + 32);
+    loop {
+    
+        let nth: u32 =  match nth.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        if nth == 1 {
+            println!("The 1st number in the sequence is 0");
+            break;
+        }
+        if nth == 2 {
+            println!("The 2nd number in the sequence is 1");
+            break;
+        }
+        if nth == 3 {
+            println!("The 3rd number in the sequence is 1");
+            break;
+        }
+        if i == nth {
+            println!("The {}th number in the sequence is {}", nth, fib_1 + fib_2);
+            break;
+        }
+
+        i = i + 1;
+        let temp = fib_1 + fib_2;
+        fib_1 = fib_2;
+        fib_2 = temp;
+
     }
     //git test
 }
